@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: #1d1d1f;
+
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #1d1d1f;
+}
+
+button {
+  cursor: pointer;
+}
