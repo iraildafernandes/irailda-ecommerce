@@ -50,26 +50,26 @@ const Home: React.FC = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
+          slidesToScroll: 1,
+        },
       },
       {
         breakpoint: 700,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 1
-        }
+          initialSlide: 1,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1
-        }
+          initialSlide: 1,
+        },
       },
-    ]
+    ],
   };
 
   return (
@@ -77,14 +77,14 @@ const Home: React.FC = () => {
       <Header />
       <ContainerHome>
         <div className="sliderArea">
-          <Slider {...settings}>
+          {/* <Slider {...settings}>
             {smartphones.map((item) => (
               <div key={item.id}>
                 <img src={item.images[0]} height={200} alt="" />
                 <h1>{item.title}</h1>
               </div>
             ))}
-          </Slider>
+          </Slider> */}
         </div>
 
         <CardList>
@@ -98,6 +98,6 @@ const Home: React.FC = () => {
       <Footer />
     </>
   );
-}
+};
 
 export default Home;

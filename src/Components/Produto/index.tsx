@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 import currencyFormatter from "../../utils/currencyFormatter";
 import { UserContext } from "../../Contexts/userContext";
 
-import {propsProduct} from "../../types/product";
+import { propsProduct } from "../../types/product";
 
 const Produto: React.FC<propsProduct> = ({ id, title, price, thumbnail }) => {
-  const {addCartItems, cartItems} = useContext(UserContext);
+  const { addCartItems } = useContext(UserContext);
   const currencyFormated = currencyFormatter.format(price);
- 
-  function addCart(){
+
+  function addCart() {
     const product: propsProduct = {
       id: id,
       title: title,
       price: price,
-      thumbnail: thumbnail
-    }
+      thumbnail: thumbnail,
+    };
 
     addCartItems(product);
   }
@@ -29,11 +29,7 @@ const Produto: React.FC<propsProduct> = ({ id, title, price, thumbnail }) => {
       <div className="areaInfo">
         <span>{title}</span>
         <span>{currencyFormated}</span>
-        {cartItems.includes(id) ?
-          <button onClick={addCart}>Já no carrinho</button>
-          :
-          <button onClick={addCart}>Adicionar ao carrinho</button>
-        }
+        <button onClick={addCart}>Adicionar ao carrinho</button>
       </div>
     </ContainerProduct>
   );
