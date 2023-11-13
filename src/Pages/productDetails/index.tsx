@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { ContainerProduct } from "./style.ts";
+import { currencyFormatter } from "../../utils/currencyFormatter.ts";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +13,8 @@ import api from "../../services/api.tsx";
 function ProductDetails() {
   const [productDetail, setProductDetail] = useState("");
   const { id } = useParams();
+
+  // const currencyFormated = currencyFormatter.format();
 
   const settings = {
     dots: true,
@@ -43,7 +46,9 @@ function ProductDetails() {
         <div className="img-area">
           <Slider {...settings}>
             {productDetail.images?.map((item: string) => (
-              <div>{<img src={item} alt={productDetail.title} />}</div>
+              <div key={item.title}>
+                <img src={item} alt={productDetail.title} />
+              </div>
             ))}
           </Slider>
           <p>{productDetail.description}</p>

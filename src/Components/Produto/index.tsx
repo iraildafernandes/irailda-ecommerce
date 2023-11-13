@@ -1,29 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ContainerProduct } from "./style";
 import { Link } from "react-router-dom";
+import currencyFormatter from "../../utils/currencyFormatter";
+import { UserContext } from "../../Contexts/userContext";
 
-type propsProduct = {
-  id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
-};
+import {propsProduct} from "../../types/product";
 
-const Produto: React.FC<propsProduct> = ({
-  id,
-  title,
-  price,
-  thumbnail,
-}: propsProduct) => {
+const Produto: React.FC<propsProduct> = ({ id, title, price, thumbnail }) => {
+  const {addCartItems, cartItems} = useContext(UserContext);
+  const currencyFormated = currencyFormatter.format(price);
+ 
+  function addCart(){
+    const product: propsProduct = {
+      id: id,
+      title: title,
+      price: price,
+      thumbnail: thumbnail
+    }
+
+    addCartItems(product);
+  }
+
   return (
     <ContainerProduct>
       <Link to={`/product-details/${id}`}>
         <img src={thumbnail} width={150} height={150} alt="" />
       </Link>
-      <div className="area-info">
+      <div className="areaInfo">
         <span>{title}</span>
-        <span>R$ {price}</span>
-        <button>Add Cart</button>
+        <span>{currencyFormated}</span>
+        {cartItems.includes(id) ?
+          <button onClick={addCart}>Já no carrinho</button>
+          :
+          <button onClick={addCart}>Adicionar ao carrinho</button>
+        }
       </div>
     </ContainerProduct>
   );

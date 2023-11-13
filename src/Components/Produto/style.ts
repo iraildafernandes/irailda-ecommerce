@@ -5,8 +5,6 @@ export const ContainerProduct = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #121212;
-  box-sizing: border-box;
-  color: #1d1d1f;
   font-size: 18px;
   width: 350px;
   height: 350px;
@@ -28,13 +26,12 @@ export const ContainerProduct = styled.div`
     justify-content: center;
   }
 
-  .area-info {
+  .areaInfo {
     display: flex;
     flex-direction: column;
     background-color: #fff;
     width: 100%;
     height: 100%;
-    position: relative;
 
     span {
       padding: 5px 0;
