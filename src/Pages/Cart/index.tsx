@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { ContainerCart } from "./style.ts";
@@ -9,6 +9,27 @@ import { UserContext } from "../../Contexts/userContext.tsx";
 
 const Cart: React.FC = () => {
   const { cartItems, removeCartItems } = useContext(UserContext);
+  const [couponCode, setCouponCode] = useState("");
+  const [discountPercentage, setDiscountPercentage] = useState(0);
+
+  function applyCoupon() {
+    if (couponCode === "DISCOUNT10") {
+      setCouponCode(couponCode);
+      setDiscountPercentage(0.1);
+    } else {
+      setCouponCode("");
+      setDiscountPercentage(0);
+      alert("Invalid coupon code");
+    }
+  }
+
+  function calculateTotal() {
+    let total = 0;
+    for (const item of cartItems) {
+      total += item.price * (1 - discountPercentage);
+    }
+    return total;
+  }
 
   return (
     <>
@@ -16,7 +37,7 @@ const Cart: React.FC = () => {
       <ContainerCart>
         {cartItems.length >= 1 ? (
           <>
-            <table border={1}>
+            <table border={0}>
               <thead>
                 <tr>
                   <th>#</th>
@@ -30,7 +51,12 @@ const Cart: React.FC = () => {
                 {cartItems.map((item, index) => (
                   <tr key={item.id}>
                     <th>{index + 1}</th>
-                    <td>{item.title}</td>
+                    <td>
+                      <div className="infoProduct">
+                        <img src={item.thumbnail} />
+                        {item.title}
+                      </div>
+                    </td>
                     <td className="actionArea">
                       <button>
                         <GrFormSubtract size={16} />
@@ -42,7 +68,10 @@ const Cart: React.FC = () => {
                     </td>
                     <td>{currencyFormatter.format(item.price)}</td>
                     <td>
-                      <button onClick={() => removeCartItems(item)}>
+                      <button
+                        onClick={() => removeCartItems(item)}
+                        className="delete"
+                      >
                         <GrClose size={16} />
                       </button>
                     </td>
@@ -53,8 +82,37 @@ const Cart: React.FC = () => {
 
             <div className="areaTotal">
               <h2>Resumo</h2>
-              <p>Total: R$ 10.000,00</p>
-              <button>Finalizar Compra</button>
+              <p>
+                <strong>Subtotal: </strong>
+                {currencyFormatter.format(
+                  calculateTotal() * (1 - discountPercentage)
+                )}
+              </p>
+
+              {discountPercentage != 0 && (
+                <p>
+                  <strong>Desconto: </strong>
+                  {"-"}
+                  {currencyFormatter.format(
+                    calculateTotal() * discountPercentage
+                  )}
+                </p>
+              )}
+
+              <p>
+                <strong>Total:</strong>{" "}
+                {currencyFormatter.format(calculateTotal())}
+              </p>
+              <input
+                type="text"
+                placeholder="Código do cupom"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
+              />
+              <div className="buttonCart">
+                <button onClick={applyCoupon}>Aplicar cupom</button>
+                <button>Finalizar Pedido</button>
+              </div>
             </div>
           </>
         ) : (

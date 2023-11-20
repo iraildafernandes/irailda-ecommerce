@@ -77,14 +77,14 @@ const Home: React.FC = () => {
       <Header />
       <ContainerHome>
         <div className="sliderArea">
-          {/* <Slider {...settings}>
+          <Slider {...settings}>
             {smartphones.map((item) => (
               <div key={item.id}>
                 <img src={item.images[0]} height={200} alt="" />
                 <h1>{item.title}</h1>
               </div>
             ))}
-          </Slider> */}
+          </Slider>
         </div>
 
         <CardList>
