@@ -1,28 +1,54 @@
-# React + TypeScript + Vite
+# BearStore &#x1F43B;
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre o Projeto
 
-Currently, two official plugins are available:
+Na BearStore, oferecemos a você a experiência definitiva em produtos eletrônicos. 
+Nossa paixão pela qualidade e inovação reflete em cada produtos que vendemos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 
-## Expanding the ESLint configuration
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **TypeScript**: Superset tipado do JavaScript para um desenvolvimento mais seguro e escalável.
+- **Vite**: Build tool (ferramenta de construção) para rápida configuração e desenvolvimento.
+  
+## Para executar a aplicação localmente, é necessário ter o Node.js instalado. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+**Clone o repositório:**
+   ```bash
+   https://github.com/iraildafernandes/irailda-ecommerce.git
 ```
-# The discount is available for use in the cart: DISCOUNT10
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. **Instale as dependências utilizando:**
+
+```bash
+npm install
+```
+ou
+
+```bash
+yarn install
+```
+
+2. **Inicie o servidor de desenvolvimento:**
+
+```bash
+npm run dev
+```
+ou
+
+```bash
+yarn dev
+```
+
+O servidor de desenvolvimento será iniciado em http://localhost:3000
+<br>
+## 🎁 Cupom de Desconto
+
+Durante o processo de compra, você pode aplicar o cupom de desconto **DISCOUNT10** no carrinho para obter 10% de desconto em sua compra.
+
+<br>
+
+
+
+
+
