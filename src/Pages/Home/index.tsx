@@ -1,40 +1,15 @@
-import { useState, useEffect } from "react";
 import Header from "../../Components/Header";
 import Produto from "../../Components/Produto";
 import Footer from "../../Components/Footer";
 import { ContainerHome, CardList } from "./style.ts";
-import { IProductInfo } from "../../types/product.ts";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import api from "../../services/api.tsx";
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/userContext.tsx";
 
 const Home: React.FC = () => {
-  const [allProducts, setAllProducts] = useState([]);
-
-  const smartphones: IProductInfo[] = allProducts.filter(
-    (item: IProductInfo) => item.category === "smartphones"
-  );
-
-  const laptops: IProductInfo[] = allProducts.filter(
-    (item: IProductInfo) => item.category === "laptops"
-  );
-  const productsTech = smartphones.concat(laptops);
-
-  useEffect(() => {
-    async function getProducts() {
-      try {
-        const responseGetProducts = await api.get("/products");
-        const data = responseGetProducts.data.products;
-        setAllProducts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    getProducts();
-  }, []);
+  const { allProducts } = useContext(UserContext);
 
   const settings = {
     dots: true,
@@ -78,17 +53,19 @@ const Home: React.FC = () => {
       <ContainerHome>
         <div className="sliderArea">
           <Slider {...settings}>
-            {smartphones.map((item) => (
-              <div key={item.id}>
-                <img src={item.images[0]} height={200} alt="" />
-                <h1>{item.title}</h1>
-              </div>
-            ))}
+            {allProducts
+              .filter((category) => category.category === "smartphones")
+              .map((item) => (
+                <div key={item.id}>
+                  <img src={item.images[0]} height={200} alt="" />
+                  <h1>{item.title}</h1>
+                </div>
+              ))}
           </Slider>
         </div>
 
         <CardList>
-          {productsTech.map((item) => (
+          {allProducts.map((item) => (
             <li key={item.id}>
               <Produto {...item} />
             </li>

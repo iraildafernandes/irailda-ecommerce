@@ -168,7 +168,7 @@ export default function SignUp() {
             </div>
           </form>
 
-          <Link to="/login">Se você já tem cadastro, faça login</Link>
+          <Link to="/signIn">Se você já tem cadastro, faça login</Link>
         </div>
       </ContainerCenter>
       <Footer />

@@ -34,6 +34,12 @@ export const HeaderContainer = styled.header`
       align-items: center;
       gap: 20px;
 
+      button{
+        border: none;
+        background-color: transparent;
+        font-size: 18px;
+      }
+
       .area-qty {
         position: relative;
 

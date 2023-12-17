@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { ContainerCart } from "./style.ts";
@@ -8,9 +9,21 @@ import currencyFormatter from "../../utils/currencyFormatter.ts";
 import { UserContext } from "../../Contexts/userContext.tsx";
 
 const Cart: React.FC = () => {
-  const { cartItems, removeCartItems } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const { cartItems, removeCartItems, isAuthenticated } =
+    useContext(UserContext);
   const [couponCode, setCouponCode] = useState("");
   const [discountPercentage, setDiscountPercentage] = useState(0);
+
+  function teste() {
+    if (isAuthenticated) {
+      alert("Compra finalizada com sucesso");
+    } else {
+      alert("Faça o login para prosseguir com a compra!");
+      navigate(`/signin`);
+    }
+  }
 
   function applyCoupon() {
     if (couponCode === "DISCOUNT10") {
@@ -19,7 +32,7 @@ const Cart: React.FC = () => {
     } else {
       setCouponCode("");
       setDiscountPercentage(0);
-      alert("Invalid coupon code");
+      alert("Cupom Inválido!");
     }
   }
 
@@ -111,7 +124,7 @@ const Cart: React.FC = () => {
               />
               <div className="buttonCart">
                 <button onClick={applyCoupon}>Aplicar cupom</button>
-                <button>Finalizar Pedido</button>
+                <button onClick={teste}>Finalizar Pedido</button>
               </div>
             </div>
           </>

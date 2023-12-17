@@ -24,7 +24,10 @@ const Footer: React.FC = () => {
               Email:
               <a href="mailto:bees@bees.com">bearstore@bearstore.com</a>
             </span>
-          <span>Central de atendimento: <a href="tel:0800 999 9999">0800 999 9999</a></span>
+            <span>
+              Central de atendimento:{" "}
+              <a href="tel:0800 999 9999">0800 999 9999</a>
+            </span>
           </address>
         </div>
 

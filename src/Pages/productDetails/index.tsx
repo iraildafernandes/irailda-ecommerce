@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../Contexts/userContext.tsx";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { ContainerProduct } from "./style.ts";
@@ -10,8 +11,9 @@ import "slick-carousel/slick/slick-theme.css";
 import api from "../../services/api.tsx";
 
 function ProductDetails() {
-  const [productDetail, setProductDetail] = useState("");
   const { id } = useParams();
+  const { addCartItems } = useContext(UserContext);
+  const [productDetail, setProductDetail] = useState("");
 
   const settings = {
     dots: true,
@@ -36,6 +38,17 @@ function ProductDetails() {
     getProduct();
   }, []);
 
+  function addCart() {
+    const product: propsProduct = {
+      id: id,
+      title: title,
+      price: price,
+      thumbnail: thumbnail,
+    };
+
+    addCartItems(product);
+  }
+
   return (
     <>
       <Header />
@@ -54,7 +67,8 @@ function ProductDetails() {
           <span>{productDetail.title}</span>
           <span>{productDetail.price}</span>
 
-          <button>ADD CART</button>
+          <button onClick={addCart}>Adicionar ao carrinho</button>
+
           <button>Buy Now</button>
         </div>
       </ContainerProduct>

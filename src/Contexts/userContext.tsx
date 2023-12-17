@@ -1,54 +1,66 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
+import { IProductInfo } from "../types/product";
+import api from "../services/api";
 
 export const UserContext: React.Context<{}> = createContext({});
 
 function UserProvider({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
+  const [allProducts, setAllProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [count, setCount] = useState<number>(0);
-  const [couponCode, setCouponCode] = useState<string>("");
-  const [discountPercentage, setDiscountPercentage] = useState<number>(0);
 
-  function applyCoupon() {
-    if (couponCode === "DISCOUNT10") {
-      setCouponCode(couponCode);
-      setDiscountPercentage(0.1);
-    } else {
-      setCouponCode("");
-      setDiscountPercentage(0);
-      alert("Invalid coupon code");
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const responseGetProducts = await api.get("/products");
+        const data = responseGetProducts.data.products;
+
+        const smartphones: IProductInfo[] = data.filter(
+          (item: IProductInfo) => item.category === "smartphones"
+        );
+
+        const laptops: IProductInfo[] = data.filter(
+          (item: IProductInfo) => item.category === "laptops"
+        );
+
+        const productsTech = smartphones.concat(laptops);
+        setAllProducts(productsTech);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
+    getProducts();
+  }, []);
 
   function addCartItems(product) {
-    setCartItems((cartItems) => [...cartItems, product]);
-    setCount(count + 1);
+    if (cartItems.find((item) => item.id === product.id)) {
+      alert("Item já adicionado ao carrinho");
+    } else {
+      setCartItems((cartItems) => [...cartItems, product]);
+      setCount(count + 1);
+    }
   }
 
   function removeCartItems(product) {
-    let attCart = cartItems.filter((item) => item.id !== product.id);
+    const attCart = cartItems.filter((item) => item.id !== product.id);
     setCartItems(attCart);
     setCount(count - 1);
-  }
-
-  function calculateTotal() {
-    let total = 0;
-    for (const item of cartItems) {
-      total += item.price * (1 - discountPercentage);
-    }
-    return total;
   }
 
   return (
     <UserContext.Provider
       value={{
+        isAuthenticated,
+        setIsAuthenticated,
         count,
+        allProducts,
         addCartItems,
         cartItems,
         removeCartItems,
-        couponCode,
-        applyCoupon,
-        discountPercentage,
-        calculateTotal,
+        user,
+        setUser,
       }}
     >
       {children}
