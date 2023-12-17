@@ -22,13 +22,14 @@ export default function SignIn() {
     if (email === "" || password === "") {
       setMessage("Todos os campos são obrigatórios!");
     } else {
-      const userExists = mockUsers.find(user => user.email === email && user.password === password)
-      console.log(userExists)
-      if(userExists){
+      const userExists = mockUsers.find(
+        (user) => user.email === email && user.password === password
+      );
+      if (userExists) {
         setIsAuthenticated(true);
         setUser(userExists);
         navigate(`/`);
-      } else{
+      } else {
         setMessage("E-mail ou senha invalidos!");
       }
     }

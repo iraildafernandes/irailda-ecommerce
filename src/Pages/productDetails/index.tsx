@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../Contexts/userContext.tsx";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import api from "../../services/api.tsx";
 
 function ProductDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { addCartItems } = useContext(UserContext);
   const [productDetail, setProductDetail] = useState("");
@@ -40,13 +41,23 @@ function ProductDetails() {
 
   function addCart() {
     const product: propsProduct = {
-      id: id,
-      title: title,
-      price: price,
-      thumbnail: thumbnail,
+      id: productDetail.id,
+      title: productDetail.title,
+      price: productDetail.price,
+      thumbnail: productDetail.thumbnail,
     };
-
     addCartItems(product);
+  }
+
+  function buyNow() {
+    const product: propsProduct = {
+      id: productDetail.id,
+      title: productDetail.title,
+      price: productDetail.price,
+      thumbnail: productDetail.thumbnail,
+    };
+    addCartItems(product);
+    navigate("/cart");
   }
 
   return (
@@ -69,7 +80,7 @@ function ProductDetails() {
 
           <button onClick={addCart}>Adicionar ao carrinho</button>
 
-          <button>Buy Now</button>
+          <button onClick={buyNow}>Comprar agora</button>
         </div>
       </ContainerProduct>
       <Footer />
