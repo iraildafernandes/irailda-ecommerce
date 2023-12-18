@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import Search from "../../Components/Search";
 
-export const ContainerHome = styled.div`
+export const ContainerSearch = styled.div`
   padding: 60px;
 
   .sliderArea{

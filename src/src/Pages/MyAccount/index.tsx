@@ -7,7 +7,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { UserContext } from "../../Contexts/userContext.tsx";
 
 const MyAccount: React.FC = () => {
-  const { user } = useContext(UserContext);
+  const { loggedUser } = useContext(UserContext);
 
   return (
     <>
@@ -27,7 +27,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Seu nome"
                   name="name"
-                  value={user.name}
+                  value={loggedUser.name}
                   readOnly
                 />
 
@@ -35,7 +35,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="email@email.com"
                   name="email"
-                  value={user.email}
+                  value={loggedUser.email}
                   readOnly
                 />
 
@@ -43,7 +43,7 @@ const MyAccount: React.FC = () => {
                   type="tel"
                   placeholder="Digite o seu numero de telefone"
                   name="phone"
-                  value={user.phone}
+                  value={loggedUser.phone}
                   readOnly
                 />
 
@@ -51,7 +51,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="CEP"
                   name="zipCode"
-                  value={user.zipcode}
+                  value={loggedUser.zipcode}
                   readOnly
                 />
 
@@ -59,7 +59,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Logradouro"
                   name="street"
-                  value={user.street}
+                  value={loggedUser.street}
                   readOnly
                 />
 
@@ -67,7 +67,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Número"
                   name="number"
-                  value={user.number}
+                  value={loggedUser.number}
                   readOnly
                 />
               </div>
@@ -77,7 +77,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Complemento"
                   name="complement"
-                  value={user.complement}
+                  value={loggedUser.complement}
                   readOnly
                 />
 
@@ -85,7 +85,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Bairro"
                   name="neighborhood"
-                  value={user.neighborhood}
+                  value={loggedUser.neighborhood}
                   readOnly
                 />
 
@@ -93,7 +93,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Cidade"
                   name="city"
-                  value={user.city}
+                  value={loggedUser.city}
                   readOnly
                 />
 
@@ -101,7 +101,7 @@ const MyAccount: React.FC = () => {
                   type="text"
                   placeholder="Estado"
                   name="state"
-                  value={user.state}
+                  value={loggedUser.state}
                   readOnly
                 />
 
@@ -109,7 +109,7 @@ const MyAccount: React.FC = () => {
                   type="password"
                   placeholder="Senha"
                   name="password"
-                  value={user.password}
+                  value={loggedUser.password}
                   readOnly
                 />
               </div>

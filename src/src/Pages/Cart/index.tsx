@@ -16,13 +16,23 @@ const Cart: React.FC = () => {
   const [couponCode, setCouponCode] = useState("");
   const [discountPercentage, setDiscountPercentage] = useState(0);
 
-  function teste() {
+  function handleCompletePurchase() {
     if (isAuthenticated) {
       alert("Compra finalizada com sucesso");
+      navigate(`/`);
     } else {
       alert("Faça o login para prosseguir com a compra!");
       navigate(`/signin`);
     }
+  }
+
+  function calculateTotal() {
+    let total = 0;
+    for (const item of cartItems) {
+      total += item.price;
+    }
+
+    return total;
   }
 
   function applyCoupon() {
@@ -30,18 +40,8 @@ const Cart: React.FC = () => {
       setCouponCode(couponCode);
       setDiscountPercentage(0.1);
     } else {
-      setCouponCode("");
-      setDiscountPercentage(0);
       alert("Cupom Inválido!");
     }
-  }
-
-  function calculateTotal() {
-    let total = 0;
-    for (const item of cartItems) {
-      total += item.price * (1 - discountPercentage);
-    }
-    return total;
   }
 
   return (
@@ -74,7 +74,7 @@ const Cart: React.FC = () => {
                       <button>
                         <GrFormSubtract size={16} />
                       </button>
-                      <span>10</span>
+                      <span>1</span>
                       <button>
                         <AiOutlinePlus size={16} />
                       </button>
@@ -98,7 +98,7 @@ const Cart: React.FC = () => {
               <p>
                 <strong>Subtotal: </strong>
                 {currencyFormatter.format(
-                  calculateTotal() * (1 - discountPercentage)
+                  calculateTotal() 
                 )}
               </p>
 
@@ -114,7 +114,7 @@ const Cart: React.FC = () => {
 
               <p>
                 <strong>Total:</strong>{" "}
-                {currencyFormatter.format(calculateTotal())}
+                {currencyFormatter.format(calculateTotal() - (calculateTotal() * discountPercentage))}
               </p>
               <input
                 type="text"
@@ -124,7 +124,7 @@ const Cart: React.FC = () => {
               />
               <div className="buttonCart">
                 <button onClick={applyCoupon}>Aplicar cupom</button>
-                <button onClick={teste}>Finalizar Pedido</button>
+                <button onClick={handleCompletePurchase}>Finalizar Pedido</button>
               </div>
             </div>
           </>

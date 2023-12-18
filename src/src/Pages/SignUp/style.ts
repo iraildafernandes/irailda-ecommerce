@@ -6,12 +6,6 @@ export const ContainerCenter = styled.div`
   align-items: center;
   background-color: #efefef;
 
-  a{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
   .signup {
     background-color: #efefef;
     width: 600px;
@@ -62,6 +56,11 @@ export const ContainerCenter = styled.div`
             font-size: 15px;
             background-color: #fff;
             outline: 0;
+
+            &::placeholder {
+              opacity: 0.5;
+              color: gray;
+            }
           }
         }
       }
@@ -69,6 +68,28 @@ export const ContainerCenter = styled.div`
       span {
         color: red;
         margin: 10px 0;
+      }
+
+      .action-area {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 10px 0;
+      }
+
+      button {
+        height: 35px;
+        border: 0;
+        border-radius: 4px;
+        background-color: #121212;
+        color: #efefef;
+        font-size: 1.3rem;
+        padding: 0 20px;
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }

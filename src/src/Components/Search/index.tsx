@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ContainerSearch } from "./style";
+import { AreaContainerSearch } from "./style";
 import { IoSearchSharp } from "react-icons/io5";
 
 const Search = () => {
@@ -9,22 +9,23 @@ const Search = () => {
 
   const handleSearch = () => {
     if (value !== "") {
-      navigate(`/search/${value}}`);
+      navigate(`/search/${value}`);
     }
   };
 
   return (
-    <ContainerSearch>
+    <AreaContainerSearch>
       <input
         type="search"
         value={value}
+        placeholder="Smartphones..."
         onChange={(e) => setValue(e.target.value)}
       />
 
       <button onClick={() => handleSearch()}>
         <IoSearchSharp size={30} />
       </button>
-    </ContainerSearch>
+    </AreaContainerSearch>
   );
 };
 

@@ -6,7 +6,8 @@ export const UserContext: React.Context<{}> = createContext({});
 
 function UserProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
+  const [loggedUser, setLoggedUser] = useState({});
   const [allProducts, setAllProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [count, setCount] = useState<number>(0);
@@ -55,12 +56,15 @@ function UserProvider({ children }) {
         isAuthenticated,
         setIsAuthenticated,
         count,
+        setCount,
         allProducts,
         addCartItems,
         cartItems,
         removeCartItems,
-        user,
-        setUser,
+        loggedUser,
+        setLoggedUser,
+        users,
+        setUsers,
       }}
     >
       {children}

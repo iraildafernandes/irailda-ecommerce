@@ -1,10 +1,16 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ContainerCenter } from "./style";
+import { UserContext } from "../../Contexts/userContext";
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
+import { IUsers } from "../../types/users";
 
 export default function SignUp() {
+  const id = Math.random() * 1000;
+  const navigate = useNavigate();
+  const { users, setUsers } = useContext(UserContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,24 +26,40 @@ export default function SignUp() {
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleCadastro = () => {
-    if (email === "" || password === "" || privacyPolicy === false) {
+  const handleCadastro = (e) => {
+    e.preventDefault();
+
+    const userExists = users.find((user) => user.email === email);
+
+    if(userExists){
+      setMessage("E-mail já cadastrado!");
+    
+    } else if (email === "" || password === "" || privacyPolicy === false) {
       setMessage("Todos os campos são obrigatórios!");
+    
+    } else if(password !== confirmPassword){
+      setMessage("As senhas não conferem!");
+    
     } else {
-      console.log("Nome:", name);
-      console.log("Email:", email);
-      console.log("Telefone:", phone);
-      console.log("CEP:", zipCode);
-      console.log("Rua:", street);
-      console.log("Número:", number);
-      console.log("Complemento:", complement);
-      console.log("Bairro:", neighborhood);
-      console.log("Cidade:", city);
-      console.log("Estado:", state);
-      console.log("Senha:", password);
-      console.log("Confirmação de Senha:", confirmPassword);
-      console.log("Política de Privacidade:", privacyPolicy);
+      const newUser: IUsers = {
+        id: id,
+        name: name,
+        email: email,
+        phone: phone,
+        zipcode: zipCode,
+        street: street,
+        number: number,
+        complement: complement,
+        neighborhood: neighborhood,
+        city: city,
+        state: state,
+        password: password,
+      }
+      setUsers(users => [...users, newUser]);
+      alert(`${name}, cadastro efetuado com sucesso!`)
+      navigate("/signin");
     }
+
   };
 
   return (

@@ -4,19 +4,18 @@ import { HeaderContainer } from "./style";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { LuUserCircle2 } from "react-icons/lu";
 import { RiBearSmileLine } from "react-icons/ri";
-
 import { UserContext } from "../../Contexts/userContext";
 import Search from "../Search";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
 
-  const { count, isAuthenticated, setIsAuthenticated, user, setUser } =
-    useContext(UserContext);
+  const { count, setCount, isAuthenticated, setIsAuthenticated, loggedUser, setLoggedUser } = useContext(UserContext);
 
   function logout() {
     setIsAuthenticated(false);
-    setUser({});
+    setLoggedUser({});
+    setCount(0);
     navigate(`/`);
   }
 
@@ -33,7 +32,7 @@ const Header: React.FC = () => {
             <>
               <li>
                 <span>
-                  Bem-vindo(a), <strong>{user.name}</strong>
+                  Bem-vindo(a), <strong>{loggedUser.name}</strong>
                 </span>
               </li>
               <li>

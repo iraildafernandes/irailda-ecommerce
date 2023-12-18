@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const ContainerCenter = styled.div`
-  /* height: 100%; */
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #efefef;
-  /* padding: 60px; */
+  padding: 60px;
 
-  .signup {
+  .login {
     background-color: #efefef;
     width: 600px;
     display: flex;
@@ -24,9 +24,8 @@ export const ContainerCenter = styled.div`
 
     form {
       margin-top: 1.5rem;
-      width: 100%;
+      width: 50%;
       display: flex;
-      flex-wrap: wrap;
       flex-direction: column;
 
       h1 {
@@ -34,45 +33,25 @@ export const ContainerCenter = styled.div`
         color: #141219;
       }
 
-      .input-area {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+      input {
+        margin-bottom: 1rem;
+        height: 35px;
+        border-radius: 4px;
+        border: none;
+        padding: 10px;
+        font-size: 15px;
+        background-color: #fff;
+        outline: 0;
 
-        @media (max-width: 400px) {
-          flex-direction: column;
-        }
-
-        div {
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: column;
-
-          input {
-            margin-bottom: 1rem;
-            height: 35px;
-            width: 250px;
-            border-radius: 4px;
-            border: none;
-            padding: 10px;
-            font-size: 15px;
-            background-color: #fff;
-            outline: 0;
-          }
+        &::placeholder {
+          opacity: 0.5;
+          color: gray;
         }
       }
 
       span {
         color: red;
         margin: 10px 0;
-      }
-
-      .action-area {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-        padding: 10px 0;
       }
 
       button {
@@ -82,7 +61,6 @@ export const ContainerCenter = styled.div`
         background-color: #121212;
         color: #efefef;
         font-size: 1.3rem;
-        padding: 0 20px;
 
         &:hover {
           opacity: 0.8;

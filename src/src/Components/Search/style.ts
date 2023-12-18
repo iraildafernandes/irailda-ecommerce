@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerSearch = styled.div`
+export const AreaContainerSearch = styled.div`
   display: flex;
   
   input{
@@ -10,6 +10,12 @@ export const ContainerSearch = styled.div`
     font-size: 18px;
     padding: 0 12px;
     outline: 0;
+
+    &::placeholder {
+      opacity: 0.5;
+      color: gray;
+      font-style: italic;
+    }
   }
 
   button{
@@ -17,7 +23,5 @@ export const ContainerSearch = styled.div`
     background-color: transparent;
     padding: 0 10px;
   }
-
-
 
 `;

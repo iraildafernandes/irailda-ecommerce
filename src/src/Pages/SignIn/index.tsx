@@ -6,11 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 
-import { mockUsers } from "../../Mock/users.ts";
-
 export default function SignIn() {
   const navigate = useNavigate();
-  const { setIsAuthenticated, setUser } = useContext(UserContext);
+  const { setIsAuthenticated, users, setLoggedUser } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,26 +17,23 @@ export default function SignIn() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email === "" || password === "") {
+    const userExists = users.find((user) => user.email === email && user.password === password);
+    if (userExists) {
+      setIsAuthenticated(true);
+      setLoggedUser(userExists);
+      navigate(`/`);
+    
+    } else if (email === "" || password === "") {
       setMessage("Todos os campos são obrigatórios!");
+    
     } else {
-      const userExists = mockUsers.find(
-        (user) => user.email === email && user.password === password
-      );
-      if (userExists) {
-        setIsAuthenticated(true);
-        setUser(userExists);
-        navigate(`/`);
-      } else {
         setMessage("E-mail ou senha invalidos!");
-      }
     }
   };
 
   return (
     <>
       <Header />
-
       <ContainerCenter>
         <div className="login">
           <form>
